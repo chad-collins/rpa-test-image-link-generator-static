@@ -1,0 +1,265 @@
+/* Dracula Dark Theme Colors */
+:root {
+  --background: #282a36;
+  --current-line: #44475a;
+  --selection: #6272a4;
+  --foreground: #f8f8f2;
+  --comment: #6272a4;
+  --cyan: #8be9fd;
+  --green: #50fa7b;
+  --orange: #ffb86c;
+  --pink: #ff79c6;
+  --purple: #bd93f9;
+  --red: #ff5555;
+  --yellow: #f1fa8c;
+}
+
+/* Reset and global styles */
+body {
+  margin: 1.25rem;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Container styles */
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#app {
+  text-align: center;
+  max-width: 37.5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#app h1 {
+  color: var(--purple);
+}
+
+/* Form styles */
+form {
+  margin-top: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+form input {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  font-size: 1rem;
+  width: calc(100% - 1.25rem);
+  box-sizing: border-box;
+  background-color: var(--current-line);
+  color: var(--foreground);
+  border: 1px solid var(--selection);
+}
+
+/* Button container styles */
+#buttons-container {
+  margin-top: 1rem;
+  display: flex;
+  max-width: 50%;
+}
+
+/* Button styles */
+.btn {
+  width: 10rem;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: var(--selection);
+  color: var(--foreground);
+  border: none;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.btn:hover {
+  background-color: var(--current-line);
+}
+
+/* Result list styles */
+#resultList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  max-width: 100vw;
+}
+
+li {
+  max-width: 90%;
+  margin: 1.25rem;
+  background-color: var(--current-line);
+  border: 1px solid var(--selection);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+  flex-basis: calc(33.33% - 1.25rem);
+  opacity: 0;
+  animation: slideDown 0.5s ease-out forwards, slideIn 0.2s ease-out forwards, fadeIn 0.5s ease-out forwards;
+}
+
+/* Animation styles */
+@keyframes slideDown {
+  0% {
+    transform: translateY(-1.25rem);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0.625rem);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Link styles */
+a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Copy to clipboard button styles */
+.copy-icon {
+  cursor: pointer;
+  margin-right: 0.625rem;
+  font-size: 2rem;
+}
+
+.copy-icon:hover {
+  cursor: pointer;
+  margin-right: 0.625rem;
+  font-size: 2.5rem;
+}
+
+/* Notification styles */
+.temporary-message,
+.success,
+.error {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  padding: 0.9375rem;
+  border-radius: 0.3125rem;
+  color: var(--foreground);
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.success {
+  background-color: var(--purple);
+}
+
+.error {
+  background-color: var(--red);
+}
+
+.temporary-message.visible {
+  opacity: 1 !important;
+}
+
+/* Modal styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000; 
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  color: var(--foreground);
+  padding: 1.25rem;
+  border-radius: 0.625rem;
+  overflow: auto;
+  max-width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 1.75rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--purple);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Help button styles */
+#helpButton {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  background-color: var(--selection);
+  color: var(--foreground);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#helpButton:hover {
+  background-color: var(--current-line);
+}
+
+/* Copyright styles */
+.copyright {
+  margin-top: 4rem;
+}

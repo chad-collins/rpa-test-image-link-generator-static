@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character set and responsive design -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title and link to external stylesheet -->
+  <title>RPA Test Image Link Generator</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Form with input field and submit button -->
+  <form id="myForm">
+    <label for="textInput" class="search-label">Paste image path or log:</label>
+    <input type="text" id="textInput" name="textInput" required>
+
+    <!-- Buttons container with Submit and Clear Results buttons -->
+    <div id="buttons-container">
+      <input class="btn" type="button" value="Submit" onclick="submitForm()">
+      <input class="btn" type="button" value="Clear Results" onclick="resetList()">
+    </div>
+  </form>
+
+  <!-- Help button with modal functionality -->
+  <button id="helpButton">?</button>
+
+  <!-- Modal for providing usage instructions and copyright information -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <!-- How to Use section with usage instructions -->
+      <div class="how-to-use">
+        <h2>How to Use</h2>
+        <p>
+          Copy and paste your raw image path into the field. You can even use log lines as long as it contains:
+        </p>
+        <pre>
+        2022_48_7_1184612764_image_1dd8e27a-2f7b-4e6c-6345-dase0f4f28a9.png
+      </pre>
+        <p>
+          After clicking submit, the application will provide you a usable screenshot link.
+        </p>
+      </div>
+
+      <!-- Copyright information with MIT License details -->
+      <div class="copyright">
+        <h2>MIT License</h2>
+        <p>
+          Copyright &copy; <span id="year"></span> Chad Collins
+        </p>
+        <p>
+          Permission is hereby granted, free of charge, to any person obtaining a copy
+          of this software and associated documentation files (the "Software"), to deal
+          in the Software without restriction, including without limitation the rights
+          to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+          copies of the Software, and to permit persons to whom the Software is
+          furnished to do so, subject to the following conditions:
+        </p>
+        <p>
+          The above copyright notice and this permission notice shall be included in
+          all copies or substantial portions of the Software.
+        </p>
+        <p>
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+          IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+          FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+          AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+          LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+          OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+          THE SOFTWARE.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result div with an empty unordered list -->
+  <div id="resultDiv">
+    <ul id="resultList"></ul>
+  </div>
+
+  <!-- JavaScript file inclusion for functionality -->
+  <script src="index.js"></script>
+
+</body>
+
+</html>
