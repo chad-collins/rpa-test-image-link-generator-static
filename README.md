@@ -1,0 +1,1 @@
+# rpa-test-image-link-generator-static
