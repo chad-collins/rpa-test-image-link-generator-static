@@ -137,7 +137,7 @@ function generateURL(userInput) {
     try {
         // Extract image path from user input and create a URL
         const urlSuffix = userInput.match(IMAGE_REGEX)[0].replace(/_/g, '/');
-        const urlPrefix = "http://papasubsvc000.recondo.vci:8111/recondo/PlainHTTPSubstantiation/";
+        const urlPrefix = "http://papasubsvc000.recondo.vci:8111/";
         return urlPrefix + urlSuffix;
     } catch (e) {
         // Show error message for any issues in creating the link
@@ -161,8 +161,16 @@ function copyToClipboard(text) {
 }
 
 function addTextToList(text) {
-    // Create a list item with copy icon and appended to the result list
+    // Create a list item with a hyperlink and copy icon, and append it to the result list
     const listItem = document.createElement('li');
+    
+    // Create the hyperlink element
+    const link = document.createElement('a');
+    link.href = text;
+    link.target = '_blank'; // Open in a new tab
+    link.textContent = text;
+
+    // Create the copy icon element
     const copyIcon = document.createElement('span');
     copyIcon.className = 'copy-icon';
     copyIcon.textContent = '📋';
@@ -173,12 +181,11 @@ function addTextToList(text) {
         copyToClipboard(text);
     });
 
-    const textSpan = document.createElement('span');
-    textSpan.textContent = text;
-
+    // Append the hyperlink and copy icon to the list item
     listItem.appendChild(copyIcon);
-    listItem.appendChild(textSpan);
+    listItem.appendChild(link);
 
+    // Append the list item to the result list
     const resultList = document.getElementById('resultList');
     resultList.appendChild(listItem);
 }

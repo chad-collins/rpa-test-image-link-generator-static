@@ -21,6 +21,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--background);
   color: var(--foreground);
+  max-width: 700px;
 }
 
 /* Container styles */
@@ -48,7 +49,7 @@ body {
 form {
   margin-top: 1.75rem;
   margin-bottom: 1.25rem;
-  max-width: 700px;
+ 
 }
 
 form input {
@@ -91,12 +92,9 @@ form input {
   padding: 0;
   display: flex;
   flex-direction: column-reverse;
-  max-width: 100vw;
 }
 
 li {
-  max-width: 90%;
-  margin: 1.25rem;
   background-color: var(--current-line);
   border: 1px solid var(--selection);
   padding: 1rem;
