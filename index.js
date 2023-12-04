@@ -137,7 +137,7 @@ function generateURL(userInput) {
     try {
         // Extract image path from user input and create a URL
         const urlSuffix = userInput.match(IMAGE_REGEX)[0].replace(/_/g, '/');
-        const urlPrefix = "http://papasubsvc000.recondo.vci:8111/";
+        const urlPrefix = "http://papasubsvc000.recondo.vci/";
         return urlPrefix + urlSuffix;
     } catch (e) {
         // Show error message for any issues in creating the link
