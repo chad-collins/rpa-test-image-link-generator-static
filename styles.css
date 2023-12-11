@@ -94,10 +94,12 @@ form input {
   flex-direction: column-reverse;
 }
 
-li {
-  background-color: var(--current-line);
-  border: 1px solid var(--selection);
+#resultList li {
+  background-color: var(--current-line); /* Adjust the alpha value (0.0 to 1.0) for transparency */
+  border-left: 5px solid var(--purple);
+  color: var(--foreground);
   padding: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -106,6 +108,7 @@ li {
   word-break: break-word;
   flex-basis: calc(33.33% - 1.25rem);
   opacity: 0;
+
   animation: slideDown 0.5s ease-out forwards, slideIn 0.2s ease-out forwards, fadeIn 0.5s ease-out forwards;
 }
 
@@ -158,16 +161,20 @@ a:hover {
   cursor: pointer;
   margin-right: 0.625rem;
   font-size: 2rem;
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+  user-select: none;
 }
 
-.copy-icon:hover {
-  cursor: pointer;
-  margin-right: 0.625rem;
-  font-size: 2.5rem;
+
+.copy-icon:active {
+  transform: scale(0.80);
+
 }
+
 
 /* Notification styles */
-.temporary-message,
+.notify-bubble,
 .success,
 .error {
   position: fixed;
@@ -178,7 +185,9 @@ a:hover {
   color: var(--foreground);
   transition: opacity 0.3s ease-in-out;
   opacity: 0;
+  animation: wiggle 0.5s ease-in-out; /* Apply the wiggle animation */
 }
+
 
 .success {
   background-color: var(--purple);
@@ -188,7 +197,7 @@ a:hover {
   background-color: var(--red);
 }
 
-.temporary-message.visible {
+.notify-bubble.visible {
   opacity: 1 !important;
 }
 
@@ -218,7 +227,7 @@ body {
   padding: 1.25rem;
   border-radius: 0.625rem;
   overflow: auto;
-  max-width: 80%;
+  max-width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -264,3 +273,33 @@ body {
 .copyright {
   margin-top: 4rem;
 }
+
+
+@keyframes wiggle {
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+#md-block ul li {
+  background-color: var(--background);
+  border-left: 2px solid var(--purple);
+  color: var(--foreground);
+  padding: 1rem;
+  margin: 10px 0;
+  font-size: small;
+}
+

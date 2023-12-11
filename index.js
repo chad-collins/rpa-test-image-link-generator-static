@@ -1,12 +1,14 @@
-// Regular expression for image pattern
-const IMAGE_REGEX = /\b\d{4}_.*?image.*?\.png\b/;
+const IMAGE_REGEX = /\b\d{4}_.*?image.*?\.png\b/g;
+const URL_PREFIX = "http://papasubstr001.recondo.vci/";
 
 // Event listener for when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
+    
     // Help modal functionality
     const helpButton = document.getElementById('helpButton');
     const modal = document.getElementById('modal');
     const closeBtn = document.querySelector('.close');
+
 
     // Event listeners for showing and hiding the help modal
     helpButton.addEventListener('click', () => showModal(modal));
@@ -18,16 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Initialize the year element in the copyright section
-    const yearElement = document.getElementById('year');
-    updateYear(yearElement);
 });
-
-// Function to update the year dynamically in the copyright section
-function updateYear(yearElement) {
-    const currentYear = new Date().getFullYear();
-    yearElement.textContent = currentYear;
-}
 
 // Function to show a modal
 function showModal(modal) {
@@ -42,7 +35,7 @@ function hideModal(modal) {
 }
 
 // Function to show a temporary message/notification
-function showTemporaryMessage(message, messageType, duration = 3000) {
+function notifyBubble(message, messageType, duration = 3000) {
     const messageElement = createMessageElement(message, messageType);
     document.body.appendChild(messageElement);
 
@@ -69,7 +62,7 @@ function createMessageElement(message, messageType) {
     messageElement.textContent = message;
 
     // Always assign the base class
-    messageElement.className = 'temporary-message';
+    messageElement.className = 'notify-bubble';
 
     // Add additional classes based on the message type
     if (messageType === 'success') {
@@ -82,30 +75,23 @@ function createMessageElement(message, messageType) {
 }
 
 
-
 function submitForm() {
     const inputElement = document.getElementById('textInput');
     const userInput = inputElement.value;
 
     if (validateUserInput(userInput)) {
-        const generatedLink = generateURL(userInput);
-        addTextToList(generatedLink);
+        const generatedUrls = generateURL(userInput);
+        createUrlListItems(generatedUrls);
         clearForm();
 
         // Focus on the input element after clearing the form
         inputElement.focus();
 
-        // Get the focused window (if any) and bring it to focus
-        const window = BrowserWindow.getFocusedWindow();
-        if (window) {
-            window.focus();
-        }
-
         // Show success message
-        showTemporaryMessage("Link generated successfully", 'success');
+        notifyBubble("Link generated successfully", 'success');
     } else {
         // Show error message
-        showTemporaryMessage("Your text does not contain the image pattern. See help for details", 'error');
+        notifyBubble("Your text does not contain the image pattern. See help for details", 'error');
     }
 }
 
@@ -125,67 +111,71 @@ function resetList() {
         }
 
         // Show a temporary message indicating the list has been cleared
-        showTemporaryMessage('List cleared', 'success');
+        notifyBubble('List cleared', 'success');
     }
 }
 
 function validateUserInput(userInput) {
     return !!userInput.match(IMAGE_REGEX);
 }
-
 function generateURL(userInput) {
+    const urls = [];
+
     try {
-        // Extract image path from user input and create a URL
-        const urlSuffix = userInput.match(IMAGE_REGEX)[0].replace(/_/g, '/');
-        const urlPrefix = "http://papasubstr001.recondo.vci/";
-        return urlPrefix + urlSuffix;
+        // Extract image paths from user input and create a URL
+        const imageNames = Array.from(userInput.matchAll(IMAGE_REGEX), match => match[0].replace(/_/g, '/'));
+
+        imageNames.forEach(imageName => {
+            urls.push(`${URL_PREFIX}${imageName}`);
+        });
+
     } catch (e) {
-        // Show error message for any issues in creating the link
-        showTemporaryMessage("Error Creating Link", 'error');
+        console.error('Error:', e);
+        notifyBubble("Error Creating Link", 'error');
     }
+    console.log(urls)
+    return urls;
 }
-
 function copyToClipboard(text) {
-    // Create a temporary textarea to facilitate copying to clipboard
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.className = 'copy-to-clipboard';
-    document.body.appendChild(textArea);
-    textArea.select();
-
-    // Copy text to clipboard using the Clipboard API
     navigator.clipboard.writeText(text)
-        .then(() => showTemporaryMessage('Link copied!', 'success'))
-        .catch(err => console.error('Unable to copy text to clipboard', err))
-        .finally(() => document.body.removeChild(textArea));
+        .then(() => notifyBubble('Link copied!', 'success'))
+        .catch(err => notifyBubble('Unable to copy text to clipboard', 'error'));
 }
 
-function addTextToList(text) {
-    // Create a list item with a hyperlink and copy icon, and append it to the result list
-    const listItem = document.createElement('li');
-    
-    // Create the hyperlink element
-    const link = document.createElement('a');
-    link.href = text;
-    link.target = '_blank'; // Open in a new tab
-    link.textContent = text;
 
-    // Create the copy icon element
-    const copyIcon = document.createElement('span');
-    copyIcon.className = 'copy-icon';
-    copyIcon.textContent = '📋';
-
-    // Attach the click event listener to the copy icon
-    copyIcon.addEventListener('click', (event) => {
-        event.stopPropagation(); // Prevent the click event from reaching the list item
-        copyToClipboard(text);
-    });
-
-    // Append the hyperlink and copy icon to the list item
-    listItem.appendChild(copyIcon);
-    listItem.appendChild(link);
-
-    // Append the list item to the result list
+function createUrlListItems(urls) {
     const resultList = document.getElementById('resultList');
-    resultList.appendChild(listItem);
+
+    urls.forEach((url, index) => {
+
+        // Create a list item with a hyperlink and copy icon
+        const listItem = document.createElement('li');
+
+        // Create the hyperlink element
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank'; // Open in a new tab
+        link.textContent = url;
+
+        // Create the copy icon element
+        const copyIcon = document.createElement('span');
+        copyIcon.className = 'copy-icon';
+        copyIcon.textContent = '📋';
+
+        // Attach the click event listener to the copy icon
+        copyIcon.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent the click event from reaching the list item
+            copyToClipboard(url);
+        });
+
+        // Append the hyperlink and copy icon to the list item
+        listItem.appendChild(copyIcon);
+        listItem.appendChild(link);
+
+        // Append the list item to the result list after a delay
+        setTimeout(() => {
+            resultList.appendChild(listItem);
+        }, index * 200); // Adjust the delay time (200 milliseconds in this example)
+    });
 }
+
