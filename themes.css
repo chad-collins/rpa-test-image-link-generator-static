@@ -1,0 +1,47 @@
+:root {
+  --bg-color: #0D0D0D;
+  --container-bg: #1A1A1A;
+  --text-color: #E0E0E0;
+  --highlight-color: #8A2BE2;
+  --button-text-color: #FFFFFF;
+  --link-color: #39FF14;
+  --link-visited-color: #00FFCC;
+  --error-color: #FF073A;
+  --error-text-color: #FFFFFF;
+  --divider-gradient: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+  --log-group-bg: #222222;
+  --log-group-border: #333333;
+  --container-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --container-inner-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --textarea-border-color: #333333;
+  --textarea-bg: rgba(255, 255, 255, 0.05);
+  --textarea-bg-focus: rgba(255, 255, 255, 0.1);
+  --textarea-focus-shadow: rgba(138, 43, 226, 0.5);
+  --error-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --clear-btn-bg: #FF073A;
+  --clear-btn-hover-bg: #D9002B;
+}
+
+[data-theme="light"] {
+  --bg-color: #FAFAFA;
+  --container-bg: #FFFFFF;
+  --text-color: #212121;
+  --highlight-color: #6200EE;
+  --button-text-color: #FFFFFF;
+  --link-color: #1E88E5;
+  --link-visited-color: #757575;
+  --error-color: #D32F2F;
+  --error-text-color: #FFFFFF;
+  --divider-gradient: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+  --log-group-bg: #F5F5F5;
+  --log-group-border: #E0E0E0;
+  --container-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --container-inner-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --textarea-border-color: #E0E0E0;
+  --textarea-bg: rgba(0, 0, 0, 0.05);
+  --textarea-bg-focus: rgba(0, 0, 0, 0.1);
+  --textarea-focus-shadow: rgba(98, 0, 238, 0.5);
+  --error-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --clear-btn-bg: #E53935;
+  --clear-btn-hover-bg: #C62828;
+}

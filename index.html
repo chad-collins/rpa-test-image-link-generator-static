@@ -1,82 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module" src="https://md-block.verou.me/md-block.js"></script>
-  <title>RPA Test Image Link Generator</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>Log Link Generator</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="themes.css">
 </head>
-
 <body>
-  <form id="myForm">
-    <label for="textInput" class="search-label">Paste image path or log:</label>
-    <input type="text" id="textInput" name="textInput" required>
-    <div id="buttons-container">
-      <input class="btn" type="button" value="Submit" onclick="submitForm()">
-      <input class="btn" type="button" value="Clear Results" onclick="resetList()">
+
+  <div class="container">
+    <button class="toggle-theme" id="toggleTheme">🌙</button>
+
+    <div class="tool-container">
+      <h2>Substantiation Image Link Generator</h2>
+      <textarea id="logInput" placeholder="Paste your log here. This tool will extract any substantiations included..."></textarea>
+      <button id="processLogs">Generate Link</button>
     </div>
-  </form>
-  <button id="helpButton">?</button>
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <md-block id="md-block">
-        ## How to Use
-        Your input can be precise or a bit messy as long as it contains the image pattern.
-        Version 1.01 now allows for inputs to contain multiple substantiations and will generate
-        a link for each one.
 
-        #### Pass in text that CONTAINS a substantiation
-
-        + 2022_48_7_1184612764_image_1dd8e27a-2f7b-4e6c-6345-dase0f4f28a9.png
-        + 23:12:46.830 [main] DEBUG c.r.batch.bots.node.NodeHttpClient - Response [status=200,
-        body=2023_48_7_1184612764_image_1dd8e27a-2f7b-4e6c-9655-d27e0f4f28a9.png]
-        After clicking submit, the application will provide you a usable screenshot link.
-
-        #### Or a line that CONTAINS MULTIPLE substantiations
-
-        + {
-          "substantiations": [
-            "2023_50_2_1356389878_image_0c1a4d87-ff2a-4295-ae7d-8759c14bd18d.png",
-            "2023_50_2_135632348_image_9e39bf48-31aa-4ce2-a77d-6ac9b5e9187f.png",
-            "2023_50_2_1356389878_image_482b3ef4-4a3e-4a79-9272-44d0c8658962.png",
-            "2023_50_2_1356389878_image_1b0b08c3-578e-4ae0-9bb1-8a1283d10e1d.png",
-            "2023_50_2_1356389878_image_c9407ab7-9bfe-4306-b3fc-6d6a8c41c41f.png"
-          ]
-        }
-        
-
-
-        ## MIT License
-
-        Copyright &copy; 2023 Chad Collins
-
-        Permission is hereby granted, free of charge, to any person obtaining a copy of this
-        software and associated documentation files (the "Software"), to deal in the Software
-        without restriction, including without limitation the rights
-        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-        copies of the Software, and to permit persons to whom the Software is
-        furnished to do so, subject to the following conditions:
-
-        The above copyright notice and this permission notice shall be included in
-        all copies or substantial portions of the Software.
-
-        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-        THE SOFTWARE.
-      </md-block>
+    <div class="results-container">
+      <h3>Generated Links:</h3>
+      <div id="linkOutput"></div>
+      <button class="clear-btn" id="clearAll">Clear All</button>
     </div>
   </div>
-  <div id="resultDiv">
-    <ul id="resultList"></ul>
-  </div>
-  <script src="index.js"></script>
+
+  <script src="script.js"></script>
+
 </body>
-
 </html>
